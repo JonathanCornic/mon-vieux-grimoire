@@ -1,7 +1,8 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const Book = require('./models/Book')
 
-const app = express()
 mongoose
     .connect(
         'mongodb+srv://cornicjonathan:aPAgXvSRMjAvbOsj@cluster0.nyczbie.mongodb.net/?retryWrites=true&w=majority',
@@ -9,6 +10,10 @@ mongoose
     )
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
+
+const app = express()
+
+app.use(bodyParser.json())
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -23,8 +28,5 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/api/books', (req, res, next) => {
-    res.json({ message: ' Votre requête à bien été reçue !' })
-})
 
 module.exports = app
