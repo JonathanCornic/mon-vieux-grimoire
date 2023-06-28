@@ -1,7 +1,8 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const Book = require('./models/Book')
+
+const bookRoutes = require('./routes/book')
+const userRoutes = require('./routes/user')
 
 mongoose
     .connect(
@@ -13,7 +14,7 @@ mongoose
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -28,5 +29,7 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use('/api/books', bookRoutes)
+app.use('/api/auth', userRoutes)
 
 module.exports = app
