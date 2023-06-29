@@ -22,7 +22,43 @@ exports.createBook = (req, res) => {
         })
 }
 
-exports.createRating = (req, res) => {}
+exports.createRating = async (req, res) => {
+    try {
+      const { userId, rating } = req.body;
+      const { id } = req.params;
+  
+      if (rating < 0 || rating > 5) {
+        return res.status(400).json({ message: 'Rating should be between 0 and 5' });
+      }
+  
+      const book = await Book.findById(id);
+  
+      if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+      }
+  
+      const existingRating = book.ratings.find((r) => r.userId.toString() === userId);
+  
+      if (existingRating) {
+        return res.status(400).json({ message: 'User has already rated this book' });
+      }
+  
+      book.ratings.push({ userId, grade: rating });
+  
+      const totalRatings = book.ratings.length;
+      const sumRatings = book.ratings.reduce((sum, r) => sum + r.grade, 0);
+      const averageRating = sumRatings / totalRatings;
+  
+      book.averageRating = averageRating;
+  
+      await book.save();
+  
+      res.status(200).json({ message: 'Rating set successfully', book });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
 
 exports.modifyBook = async (req, res) => {
     try {
