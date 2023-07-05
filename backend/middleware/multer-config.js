@@ -23,7 +23,7 @@ const upload = multer({
         if (MIME_TYPES[file.mimetype]) {
             callback(null, true)
         } else {
-            callback(new Error('Invalid file type'))
+            callback(new Error('type de fichier invalide !'))
         }
     },
 })
