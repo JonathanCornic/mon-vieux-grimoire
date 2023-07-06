@@ -40,7 +40,7 @@ const resizeImage = (req, res, next) => {
     const filePath = req.file.path
 
     sharp(filePath)
-        .resize(800, 600)
+        .resize(400, 530)
         .toFile(filePath)
         .then(() => {
             next()
