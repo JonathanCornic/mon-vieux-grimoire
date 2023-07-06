@@ -5,8 +5,23 @@ const jwt = require('jsonwebtoken')
 exports.signup = async (req, res) => {
     try {
         // Hasher le mot de passe fourni
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        let hashedPassword = null
+        if (password === '') {
+            return res.status(400).json({
+                message: 'Mot de passe requis !',
+            })
+        } else {
+            hashedPassword = await bcrypt.hash(req.body.password, 10)
+        }
+         // Trouver l'utilisateur correspondant à l'email fourni
+        const findUser = await User.findOne({ email: req.body.email })
 
+        // Vérifier si l'utilisateur existe
+        if (findUser) {
+            return res.status(401).json({
+                message: 'Mail deja utilisé !',
+            })
+        }
         // Créer un nouvel utilisateur avec l'email et le mot de passe hashé
         const user = new User({
             email: req.body.email,

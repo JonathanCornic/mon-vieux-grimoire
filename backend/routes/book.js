@@ -6,9 +6,9 @@ const { upload, resizeImage } = require('../middleware/multerAndSharp')
 
 const bookCtrl = require('../controllers/book')
 
-router.post('/', auth, resizeImage, upload, bookCtrl.createBook)
+router.post('/', auth, upload, resizeImage, bookCtrl.createBook)
 router.post('/:id/rating', auth, bookCtrl.createRating)
-router.put('/:id', auth, resizeImage, upload, bookCtrl.modifyBook)
+router.put('/:id', auth, upload, resizeImage, bookCtrl.modifyBook)
 router.delete('/:id', auth, bookCtrl.deleteBook)
 router.get('/bestrating', bookCtrl.getBestBooks)
 router.get('/:id', bookCtrl.getOneBook)
