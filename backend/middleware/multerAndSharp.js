@@ -7,6 +7,7 @@ const MIME_TYPES = {
     'image/png': 'png',
 }
 
+// Configuration du stockage pour les fichiers téléchargés
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images')
@@ -18,6 +19,7 @@ const storage = multer.diskStorage({
     },
 })
 
+// Configuration de l'upload des fichiers avec multer
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, callback) => {

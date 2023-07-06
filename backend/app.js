@@ -6,6 +6,7 @@ const userRoutes = require('./routes/user')
 
 const path = require('path')
 
+// Connexion à la base de données MongoDB
 mongoose
     .connect(
         'mongodb+srv://cornicjonathan:aPAgXvSRMjAvbOsj@cluster0.nyczbie.mongodb.net/?retryWrites=true&w=majority',
@@ -16,8 +17,10 @@ mongoose
 
 const app = express()
 
+// Utilisation du middleware pour traiter les données au format JSON
 app.use(express.json())
 
+// Configuration des en-têtes CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader(
@@ -31,8 +34,11 @@ app.use((req, res, next) => {
     next()
 })
 
+// Routes pour les livres et les utilisateurs
 app.use('/api/books', bookRoutes)
 app.use('/api/auth', userRoutes)
+
+// Configuration du serveur d'images statiques
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app
