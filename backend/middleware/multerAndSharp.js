@@ -1,4 +1,5 @@
 const multer = require('multer')
+const sharp = require('sharp')
 
 const MIME_TYPES = {
     'image/jpg': 'jpg',
@@ -23,9 +24,32 @@ const upload = multer({
         if (MIME_TYPES[file.mimetype]) {
             callback(null, true)
         } else {
-            callback(new Error('type de fichier invalide !'))
+            callback(new Error('Type de fichier invalide !'))
         }
     },
-})
+}).single('image')
 
-module.exports = upload.single('image')
+// Middleware pour le redimensionnement d'images avec Sharp
+const resizeImage = (req, res, next) => {
+    if (!req.file) {
+        return next()
+    }
+
+    const filePath = req.file.path
+
+    sharp(filePath)
+        .resize(800, 600)
+        .toFile(filePath)
+        .then(() => {
+            next()
+        })
+        .catch((error) => {
+            console.log("Erreur lors du redimensionnement de l'image :", error)
+            next()
+        })
+}
+
+module.exports = {
+    upload,
+    resizeImage,
+}
