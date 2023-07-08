@@ -1,5 +1,6 @@
 const multer = require('multer')
 const sharp = require('sharp')
+const path = require('path')
 
 const MIME_TYPES = {
     'image/jpg': 'jpg',
@@ -40,14 +41,17 @@ const resizeImage = (req, res, next) => {
     const filePath = req.file.path
 
     sharp(filePath)
-        .resize(400, 530)
-        .toFile(filePath)
-        .then(() => {
-            next()
-        })
-        .catch((error) => {
-            console.log("Erreur lors du redimensionnement de l'image :", error)
-            next()
+        .resize({ width: 160, height: 260 })
+        .toBuffer()
+        .then((data) => {
+            sharp(data)
+                .toFile(filePath)
+                .then(() => {
+                    next()
+                })
+                .catch((error) => {
+                    next(error)
+                })
         })
 }
 
