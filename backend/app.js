@@ -1,23 +1,23 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-
 const bookRoutes = require('./routes/book')
 const userRoutes = require('./routes/user')
-
 const path = require('path')
 
 // Connexion à la base de données MongoDB
 mongoose
-    .connect(
-        'mongodb+srv://cornicjonathan:aPAgXvSRMjAvbOsj@cluster0.nyczbie.mongodb.net/?retryWrites=true&w=majority',
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    )
+    .connect(process.env.DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
+//Permet d'utiliser app.use
 const app = express()
 
-// Utilisation du middleware pour traiter les données au format JSON
+// Utilisation du middleware pour traiter les données au format JSON (body-parser)
 app.use(express.json())
 
 // Configuration des en-têtes CORS

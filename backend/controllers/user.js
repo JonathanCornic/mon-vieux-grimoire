@@ -6,19 +6,19 @@ exports.signup = async (req, res) => {
     try {
         // Hasher le mot de passe fourni
         let hashedPassword = null
-        if (password === '') {
+        if (req.body.password === '') {
             return res.status(400).json({
                 message: 'Mot de passe requis !',
             })
         } else {
             hashedPassword = await bcrypt.hash(req.body.password, 10)
         }
-         // Trouver l'utilisateur correspondant à l'email fourni
+        // Trouver l'utilisateur correspondant à l'email fourni
         const findUser = await User.findOne({ email: req.body.email })
 
         // Vérifier si l'utilisateur existe
         if (findUser) {
-            return res.status(401).json({
+            return res.status(409).json({
                 message: 'Mail deja utilisé !',
             })
         }
@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
         }
 
         // Si l'authentification réussit, générer un token JWT pour l'utilisateur
-        const token = jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
+        const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
             expiresIn: '24h',
         })
 
