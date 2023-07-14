@@ -39,6 +39,14 @@ Ouvrez un terminal puis `cd frontend`, faites la commande `npm install` pour ins
 
 Ouvrez un terminal puis `cd backend`, faites la commande `npm install` pour installer les dépendances puis `nodemon` pour lancer le server.
 
+## Utilisation d'un fichier .env
+
+paramettre :
+
+DB_URI
+TOKEN_SECRET
+PORT
+
 ## Comment me contacter
 
 Si vous avez des questions, des commentaires ou des propositions de collaboration, n'hésitez pas à me contacter par e-mail à cornicjonathan@gmail.com ou via mon profil LinkedIn à https://www.linkedin.com/in/jonathan-cornic-024607262/.
