@@ -43,9 +43,9 @@ Ouvrez un terminal puis `cd backend`, faites la commande `npm install` pour inst
 
 paramettre :
 
-DB_URI
-TOKEN_SECRET
-PORT
+- __DB_URI__
+- __TOKEN_SECRET__
+- __PORT__
 
 ## Comment me contacter
 
