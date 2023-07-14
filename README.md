@@ -31,6 +31,12 @@ Projet testé sur node 19.
 
 Ouvrez un terminal puis `git clone https://github.com/JonathanCornic/mon-vieux-grimoire.git`
 
+## Créez un fichier .env à la racine du projet avec en parametres 
+
+- __DB_URI__: Adresse de votre base de donnée mongoDB
+- __TOKEN_SECRET__: Votre clé secrète
+- __PORT__: votre port d'écoute 
+
 ## Lancer le frontend
 
 Ouvrez un terminal puis `cd frontend`, faites la commande `npm install` pour installer les dépendances puis `npm start` pour lancer le client.
@@ -38,14 +44,6 @@ Ouvrez un terminal puis `cd frontend`, faites la commande `npm install` pour ins
 ## Lancer le backend
 
 Ouvrez un terminal puis `cd backend`, faites la commande `npm install` pour installer les dépendances puis `nodemon` pour lancer le server.
-
-## Utilisation d'un fichier .env
-
-paramettre :
-
-- __DB_URI__
-- __TOKEN_SECRET__
-- __PORT__
 
 ## Comment me contacter
 
