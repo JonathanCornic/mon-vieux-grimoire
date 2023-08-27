@@ -47,6 +47,6 @@ Ouvrez un terminal puis `cd backend`, faites la commande `npm install` pour inst
 
 ## Comment me contacter
 
-Si vous avez des questions, des commentaires ou des propositions de collaboration, n'hésitez pas à me contacter par e-mail à cornicjonathan@gmail.com ou via mon profil LinkedIn à https://www.linkedin.com/in/jonathan-cornic-024607262/.
+Si vous avez des questions, des commentaires ou des propositions de collaboration, n'hésitez pas à me contacter par [Mail](mailto:cornicjonathan@gmail.com) ou via mon profil [LinkedIn](https://www.linkedin.com/in/jonathan-cornic-024607262/).
 
 Je suis fier d'avoir pu réaliser ce projet qui m'à beaucoup challengé et fait évoluer sur la mise en place d'un Backend de la stack __MERN__, et je suis heureux de partager cette expérience avec vous.
